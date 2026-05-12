@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FarrisHub - Educational Games & Search</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">🎮 FarrisHub</div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#games" class="nav-link">Games</a></li>
+                <li><a href="#search" class="nav-link">Search</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Welcome to FarrisHub</h1>
+            <p>Learn, Play, and Explore with Educational Games & Safe Search</p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary" onclick="scrollToSection('games')">Play Games</button>
+                <button class="btn btn-secondary" onclick="scrollToSection('search')">Search Now</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Games Section -->
+    <section id="games" class="games-section">
+        <h2>🎯 Educational Games</h2>
+        <p class="section-subtitle">Learn while having fun!</p>
+        
+        <div class="games-container">
+            <!-- Math Master -->
+            <div class="game-card">
+                <div class="game-icon">🧮</div>
+                <h3>Math Master</h3>
+                <p>Test your arithmetic skills with challenging math problems</p>
+                <button class="btn btn-play" onclick="startGame('math')">Play Game</button>
+            </div>
+
+            <!-- Vocabulary Quest -->
+            <div class="game-card">
+                <div class="game-icon">📚</div>
+                <h3>Vocabulary Quest</h3>
+                <p>Expand your vocabulary with word meaning challenges</p>
+                <button class="btn btn-play" onclick="startGame('vocabulary')">Play Game</button>
+            </div>
+
+            <!-- Science Trivia -->
+            <div class="game-card">
+                <div class="game-icon">🔬</div>
+                <h3>Science Trivia</h3>
+                <p>Discover fascinating facts about science and nature</p>
+                <button class="btn btn-play" onclick="startGame('science')">Play Game</button>
+            </div>
+
+            <!-- Geography Genius -->
+            <div class="game-card">
+                <div class="game-icon">🌍</div>
+                <h3>Geography Genius</h3>
+                <p>Test your knowledge of world capitals and landmarks</p>
+                <button class="btn btn-play" onclick="startGame('geography')">Play Game</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Game Modal -->
+    <div id="gameModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeGame()">&times;</span>
+            <div id="gameContent"></div>
+        </div>
+    </div>
+
+    <!-- Search Section -->
+    <section id="search" class="search-section">
+        <h2>🔍 Safe Search Engine</h2>
+        <p class="section-subtitle">Find educational resources safely</p>
+        
+        <div class="search-container">
+            <input 
+                type="text" 
+                id="searchInput" 
+                class="search-input" 
+                placeholder="Search for educational content..."
+                onkeypress="if(event.key==='Enter') performSearch()"
+            >
+            <button class="btn btn-search" onclick="performSearch()">Search</button>
+        </div>
+
+        <div class="search-categories">
+            <button class="category-btn" onclick="searchByCategory('math')">Math</button>
+            <button class="category-btn" onclick="searchByCategory('science')">Science</button>
+            <button class="category-btn" onclick="searchByCategory('history')">History</button>
+            <button class="category-btn" onclick="searchByCategory('geography')">Geography</button>
+            <button class="category-btn" onclick="searchByCategory('coding')">Coding</button>
+            <button class="category-btn" onclick="searchByCategory('english')">English</button>
+        </div>
+
+        <div id="searchResults" class="search-results"></div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <h2>About FarrisHub</h2>
+        <div class="about-content">
+            <div class="about-card">
+                <h3>🎮 Educational Games</h3>
+                <p>Learn core subjects through interactive games designed for students of all levels.</p>
+            </div>
+            <div class="about-card">
+                <h3>🔍 Safe Search</h3>
+                <p>A curated search engine that filters content for educational value and age-appropriateness.</p>
+            </div>
+            <div class="about-card">
+                <h3>📊 Track Progress</h3>
+                <p>Monitor your learning progress and improve your scores over time.</p>
+            </div>
+            <div class="about-card">
+                <h3>🏆 Achievements</h3>
+                <p>Earn badges and rewards as you complete games and challenges.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2026 FarrisHub. All rights reserved. | Created for educational excellence.</p>
+    </footer>
+
+    <script src="app.js"></script>
+    <script src="games.js"></script>
+    <script src="search.js"></script>
+</body>
+</html>
