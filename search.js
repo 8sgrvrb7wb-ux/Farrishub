@@ -1,203 +1,122 @@
-// Educational Search Results Database
+// Search Data - Curated Educational Resources
 const searchDatabase = {
     math: [
-        {
-            title: 'Khan Academy - Math Courses',
-            description: 'Comprehensive math courses from basic arithmetic to advanced calculus with free videos and exercises.',
-            url: 'https://www.khanacademy.org/math'
-        },
-        {
-            title: 'Mathway - Problem Solver',
-            description: 'Step-by-step solutions to math problems covering algebra, geometry, trigonometry, and calculus.',
-            url: 'https://www.mathway.com/'
-        },
-        {
-            title: 'Wolfram MathWorld',
-            description: 'Extensive online mathematics encyclopedia with definitions, theorems, and educational content.',
-            url: 'https://mathworld.wolfram.com/'
-        },
-        {
-            title: 'IXL Math - Practice Problems',
-            description: 'Interactive math practice with instant feedback for K-12 and beyond.',
-            url: 'https://www.ixl.com/math'
-        }
+        { title: 'Khan Academy - Mathematics', description: 'Free math lessons from basic to advanced algebra, geometry, and calculus.', url: '#' },
+        { title: 'Math is Fun', description: 'Interactive math lessons, games, and puzzles to help you learn.', url: '#' },
+        { title: 'Wolfram Alpha Math', description: 'Computational knowledge engine for solving math problems.', url: '#' },
+        { title: 'Brilliant.org', description: 'Learn math through interactive problem-solving.', url: '#' },
+        { title: 'Math Playground', description: 'Math games and practice for all skill levels.', url: '#' }
     ],
     science: [
-        {
-            title: 'Khan Academy - Science',
-            description: 'Biology, chemistry, physics, and more with videos and practice questions.',
-            url: 'https://www.khanacademy.org/science'
-        },
-        {
-            title: 'NASA Education',
-            description: 'Official NASA resources about space science, earth science, and exploration.',
-            url: 'https://science.nasa.gov/'
-        },
-        {
-            title: 'National Geographic Education',
-            description: 'Science and nature content including videos, articles, and interactive resources.',
-            url: 'https://education.nationalgeographic.org/'
-        },
-        {
-            title: 'Crash Course Science',
-            description: 'Engaging short videos explaining scientific concepts in an easy-to-understand way.',
-            url: 'https://www.youtube.com/user/crashcourse'
-        }
+        { title: 'Khan Academy - Science', description: 'Comprehensive science courses covering physics, chemistry, and biology.', url: '#' },
+        { title: 'Crash Course - Science', description: 'Engaging science videos explaining complex concepts.', url: '#' },
+        { title: 'NASA Education', description: 'Official NASA resources for learning about space and science.', url: '#' },
+        { title: 'National Geographic Kids', description: 'Science articles and facts written for students.', url: '#' },
+        { title: 'PBS Learning Media', description: 'Educational science videos and interactive lessons.', url: '#' }
     ],
     history: [
-        {
-            title: 'Khan Academy - History & Social Studies',
-            description: 'Historical events, civilizations, and social studies topics with educational videos.',
-            url: 'https://www.khanacademy.org/humanities/history'
-        },
-        {
-            title: 'Smithsonian Learning Lab',
-            description: 'Museum resources and educational content about history, culture, and heritage.',
-            url: 'https://learninglab.si.edu/'
-        },
-        {
-            title: 'History.com',
-            description: 'Articles, videos, and timelines covering world history, wars, and important events.',
-            url: 'https://www.history.com/'
-        },
-        {
-            title: 'BBC Learning - History',
-            description: 'Educational history content from BBC with articles, videos, and interactive features.',
-            url: 'https://www.bbc.co.uk/bitesize/subjects/zag3cdm'
-        }
+        { title: 'Khan Academy - History', description: 'History lessons covering world, American, and ancient history.', url: '#' },
+        { title: 'Crash Course - History', description: 'Engaging historical overviews and analysis.', url: '#' },
+        { title: 'History.com', description: 'Articles, timelines, and videos about historical events.', url: '#' },
+        { title: 'World History Encyclopedia', description: 'Detailed articles about people, events, and civilizations.', url: '#' },
+        { title: 'The History Channel', description: 'Historical documentaries and educational content.', url: '#' }
     ],
     geography: [
-        {
-            title: 'National Geographic - Geography',
-            description: 'Maps, articles, and resources about world geography, cultures, and landscapes.',
-            url: 'https://www.nationalgeographic.org/education/'
-        },
-        {
-            title: 'Khan Academy - Geography & Cultures',
-            description: 'Learn about different countries, regions, and cultural geography.',
-            url: 'https://www.khanacademy.org/humanities/geography-humanities-culture'
-        },
-        {
-            title: 'Google Maps Education',
-            description: 'Interactive maps for learning geography, capitals, and world locations.',
-            url: 'https://www.google.com/maps'
-        },
-        {
-            title: 'World Atlas',
-            description: 'Comprehensive atlas with maps, facts, and information about every country.',
-            url: 'https://www.worldatlas.com/'
-        }
+        { title: 'National Geographic', description: 'Maps, articles, and facts about world geography.', url: '#' },
+        { title: 'Google Earth', description: 'Explore the world with satellite imagery and street view.', url: '#' },
+        { title: 'World Atlas', description: 'Interactive maps and geographic information.', url: '#' },
+        { title: 'Geography King', description: 'Geography games and quizzes to learn about countries and capitals.', url: '#' },
+        { title: 'Khan Academy - Geography', description: 'Geography lessons and world culture courses.', url: '#' }
     ],
     coding: [
-        {
-            title: 'CodeAcademy - Learn to Code',
-            description: 'Interactive programming courses in Python, JavaScript, HTML, CSS, and more.',
-            url: 'https://www.codecademy.com/'
-        },
-        {
-            title: 'Khan Academy - Computer Science',
-            description: 'Introduction to computer science, algorithms, and programming concepts.',
-            url: 'https://www.khanacademy.org/computing'
-        },
-        {
-            title: 'freeCodeCamp',
-            description: 'Free coding tutorials and certifications for web development and programming.',
-            url: 'https://www.freecodecamp.org/'
-        },
-        {
-            title: 'Coding Game',
-            description: 'Learn programming through interactive games and coding challenges.',
-            url: 'https://www.codingame.com/'
-        }
+        { title: 'Codecademy', description: 'Interactive coding courses in Python, JavaScript, HTML, and more.', url: '#' },
+        { title: 'Khan Academy - Computer Science', description: 'Free computer science and programming courses.', url: '#' },
+        { title: 'Code.org', description: 'Computer science education for beginners to advanced programmers.', url: '#' },
+        { title: 'Repl.it', description: 'Online platform to write and run code in multiple languages.', url: '#' },
+        { title: 'Free Code Camp', description: 'Full stack web development and programming courses.', url: '#' }
     ],
     english: [
-        {
-            title: 'Khan Academy - English & Language Arts',
-            description: 'Grammar, writing, literature, and language arts education with videos and exercises.',
-            url: 'https://www.khanacademy.org/humanities/grammar'
-        },
-        {
-            title: 'Grammarly',
-            description: 'Grammar checker and writing assistant to improve your English writing skills.',
-            url: 'https://www.grammarly.com/'
-        },
-        {
-            title: 'Project Gutenberg',
-            description: 'Free digital library of over 70,000 eBooks including classic literature.',
-            url: 'https://www.gutenberg.org/'
-        },
-        {
-            title: 'BBC Learning - English',
-            description: 'English language learning resources including grammar and pronunciation guides.',
-            url: 'https://www.bbc.co.uk/learningenglish/'
-        }
+        { title: 'Grammarly', description: 'Writing assistance tool to improve grammar and style.', url: '#' },
+        { title: 'Khan Academy - English', description: 'Grammar, reading, and writing courses.', url: '#' },
+        { title: 'Purdue OWL', description: 'Online writing laboratory with grammar and citation guides.', url: '#' },
+        { title: 'SparkNotes', description: 'Study guides for literature and writing help.', url: '#' },
+        { title: 'Vocabulary.com', description: 'Learn vocabulary with games and interactive lessons.', url: '#' }
     ]
 };
 
 // Perform Search
 function performSearch() {
     const searchInput = document.getElementById('searchInput').value.toLowerCase().trim();
-    const searchResults = document.getElementById('searchResults');
-
+    
     if (!searchInput) {
-        searchResults.innerHTML = '<p style="color: #999;">Please enter a search term.</p>';
+        alert('Please enter a search term!');
         return;
     }
-
-    let results = [];
-
-    // Search through all categories
-    Object.keys(searchDatabase).forEach(category => {
-        searchDatabase[category].forEach(item => {
-            const titleMatch = item.title.toLowerCase().includes(searchInput);
-            const descriptionMatch = item.description.toLowerCase().includes(searchInput);
-            const categoryMatch = category.includes(searchInput);
-
-            if (titleMatch || descriptionMatch || categoryMatch) {
-                results.push({
-                    ...item,
-                    category: category
-                });
-            }
-        });
-    });
-
-    displaySearchResults(results, searchInput);
+    
+    displaySearchResults(searchInput);
 }
 
 // Search by Category
 function searchByCategory(category) {
-    const searchResults = document.getElementById('searchResults');
-    const results = searchDatabase[category] || [];
-
-    displaySearchResults(results, category);
+    const categoryData = searchDatabase[category] || [];
+    displayCategoryResults(categoryData, category);
 }
 
 // Display Search Results
-function displaySearchResults(results, query) {
-    const searchResults = document.getElementById('searchResults');
+function displaySearchResults(query) {
+    let results = [];
+    
+    // Search through all categories
+    for (const category in searchDatabase) {
+        const categoryResults = searchDatabase[category].filter(item =>
+            item.title.toLowerCase().includes(query) ||
+            item.description.toLowerCase().includes(query)
+        );
+        results = results.concat(categoryResults);
+    }
+    
+    displayResults(results, query);
+}
 
+// Display Category Results
+function displayCategoryResults(results, category) {
+    displayResults(results, `Category: ${category.toUpperCase()}`);
+}
+
+// Display Results Helper
+function displayResults(results, query) {
+    const resultsContainer = document.getElementById('searchResults');
+    
     if (results.length === 0) {
-        searchResults.innerHTML = `<p style="color: #ccc; text-align: center;">No results found for "${query}". Try a different search.</p>`;
+        resultsContainer.innerHTML = `
+            <div style="text-align: center; padding: 2rem; color: #666;">
+                <p>No results found for "${query}"</p>
+                <p style="font-size: 0.9rem;">Try searching for different terms or browse our categories.</p>
+            </div>
+        `;
         return;
     }
-
-    let html = `<p style="color: #ddd; margin-bottom: 1rem;">Found ${results.length} result(s) for "${query}"</p>`;
-
+    
+    let html = `<h3 style="margin-bottom: 1rem; color: #333;">Search Results (${results.length} found)</h3>`;
+    
     results.forEach(result => {
         html += `
             <div class="search-result-item">
                 <h4>${result.title}</h4>
                 <p>${result.description}</p>
-                <p style="margin-top: 0.5rem; font-size: 0.85rem; color: #999;">
-                    📌 Category: ${result.category}
-                </p>
-                <a href="${result.url}" target="_blank" style="color: #667eea; text-decoration: none; font-weight: 600;">Visit Resource →</a>
+                <a href="${result.url}" target="_blank">Learn More →</a>
             </div>
         `;
     });
-
-    searchResults.innerHTML = html;
+    
+    resultsContainer.innerHTML = html;
 }
 
-console.log('Search engine loaded with', Object.keys(searchDatabase).length, 'categories');
+// Handle Search Key Press
+function handleSearchKey(event) {
+    if (event.key === 'Enter') {
+        performSearch();
+    }
+}
+
+console.log('Search Module Loaded Successfully!');

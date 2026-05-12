@@ -1,4 +1,4 @@
-# OS files
+# OS
 .DS_Store
 Thumbs.db
 
@@ -9,25 +9,17 @@ Thumbs.db
 *.swo
 *~
 
-# Node modules (if using Node)
+# Dependencies
 node_modules/
-npm-debug.log
-yarn-error.log
-
-# Build files
-dist/
-build/
-.cache/
-
-# Environment files
-.env
-.env.local
-.env.*.local
+.npm
 
 # Logs
 *.log
-logs/
 
-# Dependencies
-package-lock.json
-yarn.lock
+# Build
+dist/
+build/
+
+# Environment
+.env
+.env.local

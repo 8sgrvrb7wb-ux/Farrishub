@@ -1,49 +1,37 @@
-// Smooth scrolling navigation
-function scrollToSection(sectionId) {
-    const element = document.getElementById(sectionId);
-    if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-    }
+// Navigation smooth scrolling
+function scrollToGames() {
+    document.getElementById('games').scrollIntoView({ behavior: 'smooth' });
 }
 
-// Update active nav link on scroll
-window.addEventListener('scroll', () => {
-    const sections = document.querySelectorAll('section');
-    const navLinks = document.querySelectorAll('.nav-link');
+function scrollToSearch() {
+    document.getElementById('search').scrollIntoView({ behavior: 'smooth' });
+}
 
-    let current = '';
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        if (pageYOffset >= sectionTop - 60) {
-            current = section.getAttribute('id');
-        }
-    });
-
-    navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href').substring(1) === current) {
-            link.classList.add('active');
+// Nav links smooth scroll
+document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href.startsWith('#')) {
+            e.preventDefault();
+            const target = document.querySelector(href);
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth' });
+            }
         }
     });
 });
 
-// Mobile menu toggle (if needed)
-const menuToggle = document.querySelector('.menu-toggle');
-const navMenu = document.querySelector('.nav-menu');
-
-if (menuToggle) {
-    menuToggle.addEventListener('click', () => {
-        navMenu.classList.toggle('active');
-    });
+// Close modal
+function closeGame() {
+    document.getElementById('gameModal').style.display = 'none';
 }
 
-// Close mobile menu when link is clicked
-if (navMenu) {
-    navMenu.addEventListener('click', (e) => {
-        if (e.target.tagName === 'A') {
-            navMenu.classList.remove('active');
-        }
-    });
-}
+// Close modal when clicking outside
+window.addEventListener('click', function(event) {
+    const modal = document.getElementById('gameModal');
+    if (event.target === modal) {
+        modal.style.display = 'none';
+    }
+});
 
-console.log('FarrisHub loaded successfully!');
+console.log('FarrisHub App Loaded Successfully!');
