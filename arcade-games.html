@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arcade Games Proxy - 1000+ Games</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #000;
+            color: #fff;
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        /* Galaxy Background with Moving Stars */
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            display: block;
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(10, 10, 30, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            text-align: center;
+            border-bottom: 2px solid #00d4ff;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px #00d4ff, 0 0 40px #0099ff;
+            color: #00d4ff;
+            letter-spacing: 2px;
+        }
+
+        .header p {
+            color: #00ff88;
+            font-size: 0.95em;
+            text-shadow: 0 0 10px #00ff88;
+        }
+
+        /* Search Section */
+        .search-section {
+            background: rgba(10, 10, 30, 0.7);
+            padding: 25px;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+        }
+
+        .search-box {
+            display: flex;
+            gap: 10px;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 12px 20px;
+            border: 2px solid #00d4ff;
+            background: rgba(0, 212, 255, 0.05);
+            color: #fff;
+            border-radius: 25px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            text-shadow: 0 0 5px #00d4ff;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            background: rgba(0, 212, 255, 0.15);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.5), inset 0 0 10px rgba(0, 212, 255, 0.1);
+            border-color: #00ff88;
+        }
+
+        .search-box input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .search-btn {
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #00d4ff, #0099ff);
+            color: #fff;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .search-btn:hover {
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.6), 0 0 50px rgba(0, 255, 136, 0.3);
+            transform: scale(1.05);
+        }
+
+        .search-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Games Grid */
+        .games-container {
+            flex: 1;
+            overflow-y: auto;
+            padding: 30px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .game-card {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(0, 255, 136, 0.05));
+            border: 2px solid rgba(0, 212, 255, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .game-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 136, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .game-card:hover::before {
+            left: 100%;
+        }
+
+        .game-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            border-color: #00ff88;
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.4), 0 0 20px rgba(0, 255, 136, 0.2);
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.2), rgba(0, 255, 136, 0.1));
+        }
+
+        .game-icon {
+            font-size: 3em;
+            margin-bottom: 10px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .game-name {
+            font-weight: bold;
+            font-size: 0.95em;
+            color: #00d4ff;
+            text-shadow: 0 0 10px #00d4ff;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .game-category {
+            font-size: 0.75em;
+            color: #00ff88;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* No Results Message */
+        .no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 40px;
+            color: #00d4ff;
+            font-size: 1.2em;
+            text-shadow: 0 0 10px #00d4ff;
+        }
+
+        /* Scrollbar Styling */
+        .games-container::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        .games-container::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .games-container::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #00d4ff, #00ff88);
+            border-radius: 5px;
+        }
+
+        .games-container::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, #00ff88, #00d4ff);
+            box-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+        }
+
+        /* Stats */
+        .stats {
+            color: #00ff88;
+            font-size: 0.85em;
+            margin-top: 5px;
+            text-shadow: 0 0 5px #00ff88;
+        }
+
+        @media (max-width: 768px) {
+            .games-container {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 15px;
+                padding: 15px;
+            }
+
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .search-section {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .search-box {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="starCanvas"></canvas>
+    
+    <div class="container">
+        <div class="header">
+            <h1>🎮 ARCADE GALAXY 🎮</h1>
+            <p>1000+ Retro & Modern Arcade Games - Unlimited Fun!</p>
+        </div>
+
+        <div class="search-section">
+            <div class="search-box">
+                <input 
+                    type="text" 
+                    id="searchInput" 
+                    placeholder="Search games by name or category..."
+                    autocomplete="off"
+                >
+                <button class="search-btn" onclick="performSearch()">SEARCH</button>
+            </div>
+        </div>
+
+        <div class="games-container" id="gamesContainer">
+            <!-- Games will be populated here -->
+        </div>
+    </div>
+
+    <script>
+        // Galaxy Background - Moving Stars
+        const canvas = document.getElementById('starCanvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let stars = [];
+        let time = 0;
+
+        class Star {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.radius = Math.random() * 1.5;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
+                this.opacity = Math.random() * 0.5 + 0.5;
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                if (this.x < 0) this.x = canvas.width;
+                if (this.x > canvas.width) this.x = 0;
+                if (this.y < 0) this.y = canvas.height;
+                if (this.y > canvas.height) this.y = 0;
+
+                this.opacity = Math.sin(time * 0.01) * 0.3 + 0.5;
+            }
+
+            draw() {
+                ctx.fillStyle = `rgba(0, 212, 255, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fill();
+
+                ctx.strokeStyle = `rgba(0, 255, 136, ${this.opacity * 0.5})`;
+                ctx.lineWidth = 0.5;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius + 1, 0, Math.PI * 2);
+                ctx.stroke();
+            }
+        }
+
+        // Initialize stars
+        for (let i = 0; i < 200; i++) {
+            stars.push(new Star());
+        }
+
+        function animateStars() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Draw galaxy core glow
+            let gradient = ctx.createRadialGradient(
+                canvas.width / 2, canvas.height / 2, 0,
+                canvas.width / 2, canvas.height / 2, canvas.width
+            );
+            gradient.addColorStop(0, 'rgba(0, 212, 255, 0.05)');
+            gradient.addColorStop(0.5, 'rgba(0, 255, 136, 0.02)');
+            gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            stars.forEach(star => {
+                star.update();
+                star.draw();
+            });
+
+            time++;
+            requestAnimationFrame(animateStars);
+        }
+
+        animateStars();
+
+        // Resize canvas on window resize
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // Generate 1000 Arcade Games Database
+        const gameCategories = {
+            'Classic Arcade': ['Pac-Man', 'Donkey Kong', 'Space Invaders', 'Asteroids', 'Galaga', 'Centipede', 'Ms. Pac-Man', 'Dig Dug', 'Frogger', 'Defender'],
+            'Shooting': ['Contra', 'Gradius', 'Castlevania', 'Metal Slug', 'Strikers 1945', 'Ikaruga', 'Bullet Hell Pro', 'Touhou', 'Danmaku', 'Sky Force'],
+            'Platformer': ['Super Mario Bros', 'Sonic the Hedgehog', 'Mega Man', 'Kirby', 'Metroid', 'Castlevania', 'Ghouls n Ghosts', 'Rocket Knight', 'Aladdin', 'Lion King'],
+            'Fighting': ['Street Fighter II', 'Mortal Kombat', 'King of Fighters', 'Tekken', 'Soul Calibur', 'Marvel vs Capcom', 'Guilty Gear', 'BlazBlue', 'Darkstalkers', 'Virtua Fighter'],
+            'Puzzle': ['Tetris', 'Puyo Puyo', 'Columns', 'Dr. Mario', 'Klax', 'Lumines', 'Portal', 'Baba Is You', 'The Witness', 'Braid'],
+            'Racing': ['OutRun', 'Daytona USA', 'Ridge Racer', 'Burnout', 'Need for Speed', 'Gran Turismo', 'F-Zero', 'Mario Kart', 'Crash Team Racing', 'Wipeout'],
+            'Sports': ['NBA Jam', 'Mutant League Hockey', 'NHL', 'FIFA', 'Madden Football', 'Baseball', 'Tennis', 'Golf', 'Football', 'Soccer'],
+            'RPG': ['Dragon Quest', 'Final Fantasy', 'Chrono Trigger', 'Secret of Mana', 'Earthbound', 'Persona', 'Fire Emblem', 'Dragon Age', 'Witcher', 'Elder Scrolls'],
+            'Adventure': ['The Legend of Zelda', 'Metroid', 'Castlevania', 'Wonderboy', 'Pitfall', 'Kabuki Quantum Fighter', 'Belmont\'s Revenge', 'Adventure Island', 'Bubble Bobble', 'Dragon\'s Lair'],
+            'Action': ['Die Hard', 'RoboCop', 'Predator', 'Total Recall', 'Terminator', 'Judge Dredd', 'Alien', 'Batman', 'Superman', 'Spider-Man']
+        };
+
+        let allGames = [];
+
+        // Generate 1000 unique games
+        function generateGames() {
+            const gameNames = [
+                'Alpha Strike', 'Blaster', 'Cyber Knight', 'Delta Force', 'Epoch', 'Phoenix Force',
+                'Galaxy Quest', 'Hyperion', 'Inferno', 'Jetpack Joe', 'Kraken Attack', 'Laser Maze',
+                'Meteor Storm', 'Neon Nights', 'Orbit Runner', 'Pixel Quest', 'Quantum Jump', 'Rocket Rider',
+                'Star Burst', 'Thunder Storm', 'Ultra Force', 'Void Walker', 'Wave Master', 'X-Factor',
+                'Zenith', 'Battle Royale', 'Cosmic Clash', 'Digital Dreams', 'Echoes', 'Fury',
+                'Ghost Runner', 'Horizon', 'Iron Fist', 'Jungle King', 'Karate Kid', 'Lightning',
+                'Magic Quest', 'Ninja', 'Oasis', 'Power Play', 'Quantum Leap', 'Rogue', 'Sonic Wave',
+                'Turbo', 'Ultra', 'Victory', 'Wild West', 'Xeno', 'Yankee', 'Zero'
+            ];
+
+            const adjectives = [
+                'Super', 'Mega', 'Ultra', 'Hyper', 'Extreme', 'Turbo', 'Ultimate', 'Maximum',
+                'Cosmic', 'Stellar', 'Quantum', 'Digital', 'Pixel', 'Retro', 'Electric', 'Golden'
+            ];
+
+            const suffixes = [
+                'Quest', 'Force', 'Storm', 'Chronicles', 'Legends', 'Saga', 'Journey', 'Adventure',
+                'Assault', 'Battle', 'Clash', 'Strike', 'Blitz', 'Rush', 'Dash', 'Flight'
+            ];
+
+            let gameId = 0;
+            const icons = ['🎮', '🚀', '⭐', '👾', '🎯', '🎲', '🏆', '⚡', '🌟', '🔥'];
+
+            for (let category in gameCategories) {
+                let baseGames = gameCategories[category];
+                for (let i = 0; i < 100; i++) {
+                    const baseName = baseGames[i % baseGames.length];
+                    const adj = adjectives[Math.floor(Math.random() * adjectives.length)];
+                    const suffix = suffixes[Math.floor(Math.random() * suffixes.length)];
+                    const variation = i > 0 ? ` ${Math.floor(i / 10) + 1}` : '';
+                    
+                    allGames.push({
+                        id: gameId++,
+                        name: `${adj} ${baseName} ${suffix}${variation}`,
+                        category: category,
+                        icon: icons[Math.floor(Math.random() * icons.length)],
+                        searchText: `${adj} ${baseName} ${suffix} ${category}`.toLowerCase()
+                    });
+                }
+            }
+
+            // Shuffle games
+            allGames = allGames.sort(() => 0.5 - Math.random()).slice(0, 1000);
+            
+            displayGames(allGames);
+        }
+
+        function displayGames(games) {
+            const container = document.getElementById('gamesContainer');
+            container.innerHTML = '';
+
+            if (games.length === 0) {
+                container.innerHTML = '<div class="no-results">🔍 No games found. Try a different search!</div>';
+                return;
+            }
+
+            games.forEach(game => {
+                const gameCard = document.createElement('div');
+                gameCard.className = 'game-card';
+                gameCard.onclick = () => alert(`🎮 Launching: ${game.name}\n\nCategory: ${game.category}`);
+                gameCard.innerHTML = `
+                    <div class="game-icon">${game.icon}</div>
+                    <div class="game-name">${game.name}</div>
+                    <div class="game-category">${game.category}</div>
+                    <div class="stats">ID: #${String(game.id).padStart(4, '0')}</div>
+                `;
+                container.appendChild(gameCard);
+            });
+        }
+
+        function performSearch() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            
+            if (query.trim() === '') {
+                displayGames(allGames);
+                return;
+            }
+
+            const filtered = allGames.filter(game => 
+                game.searchText.includes(query)
+            );
+
+            displayGames(filtered);
+        }
+
+        // Search on Enter key
+        document.getElementById('searchInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                performSearch();
+            }
+        });
+
+        // Initialize
+        generateGames();
+    </script>
+</body>
+</html>
